@@ -12,7 +12,7 @@ app = Flask(__name__)
 #testing if this works
 #   ; open http://localhost:5000/index
 @app.route('/index', methods=['GET'])
-def get_index():
+def get_x():
     return render_template('index.html')
 
 # These lines start the server if you run this file directly
