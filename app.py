@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # GET /index
 # Returns the homepage
-# Try it: bang
+#testing if this works
 #   ; open http://localhost:5000/index
 
 
