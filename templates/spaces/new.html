@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>New listing</title>
+  </head>
+  <body>
+    <h1>Create a new listing</h1>
+    <form action="/index" method="POST">
+        {% if errors %}
+        <p class="t-errors">
+            Your submission contains errors:
+            {{ errors | join(', ')}}
+        </p>
+        {% endif %}
+        <p>
+            <label for="name">Name</label>
+            <br>
+            <input type="text" name="name" id="name">
+        </p>
+
+        <p>
+            <label for="description">Description</label>
+            <br>
+            <input type="text" name="description" id="description">
+        </p>
+        <p>
+            <label for="description">Price</label>
+            <br>
+            <input type="number" name="price" step="any" min="0" id="price">
+        </p>
+
+        <input type="submit" value="Add listing"> 
+    </form>
+  </body>
+</html>

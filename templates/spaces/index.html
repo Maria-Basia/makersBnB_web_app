@@ -14,33 +14,18 @@
         <h1>
             Listings
         </h1>
-        <h2>hello</h2>
+        <p>Description placeholder</p>
+        <p><a href="/index/new"><button type="button">Create a new listing</button></a></p>
         {% for space in spaces %}
         <ul>
             <li>
-                Name: {{space.name}}
-                <p>Price per night: {{space.price}}</p>
+                <a href="/index/{{space.id}}">{{space.name}}</a>
+                <p>Price per night: £{{space.price}}</p> 
                 <p>Description: {{space.description}}</p>
+                <br>
             </li>
         </ul>    
         {% endfor %}
     </body>
 </html>
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head></head>
-  <body>
-      <h1>Albums</h1>
-
-    {% for album in albums %}
-      <div>
-        Title: {{album.title}}
-        Released: {{album.release_year}}
-      </div>
-    {% endfor %}
-  </body>
-</html> -->
-
 

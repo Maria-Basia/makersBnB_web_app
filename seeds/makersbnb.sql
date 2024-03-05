@@ -45,7 +45,7 @@ INSERT INTO users (email_address, password) VALUES ('user_4@test.com', 'Jazz');
 
 
 -- Finally, we add any records that are needed for the tests to run
-INSERT INTO spaces (name, description, price, user_id) VALUES ('space_1', 'description_1', 45.50, 1);
+INSERT INTO spaces (name, description, price, user_id) VALUES ('space_1', 'description_1', 45.5, 1);
 INSERT INTO spaces (name, description, price, user_id) VALUES ('space_2', 'description_2', 14000.99, 2);    
 
 
