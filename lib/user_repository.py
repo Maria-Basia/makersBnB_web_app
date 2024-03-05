@@ -20,7 +20,7 @@ class UserRepository:
     def add(self, user):
         rows = self._connection.execute('INSERT INTO users (email_address, password) VALUES (%s, %s)', [
             user.email_address, user.password ])
-        return None
+        return user
 
     
 
