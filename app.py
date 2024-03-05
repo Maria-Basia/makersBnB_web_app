@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # GET /index
 # Returns the homepage
-# Try it:
+# Try it: bang
 #   ; open http://localhost:5000/index
 @app.route('/index', methods=['GET'])
 def get_index():
@@ -23,7 +23,6 @@ if __name__ == '__main__':
 
 
     
-#test
 
 
 
