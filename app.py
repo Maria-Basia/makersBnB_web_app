@@ -11,9 +11,7 @@ app = Flask(__name__)
 # Returns the homepage
 #testing if this works
 #   ; open http://localhost:5000/index
-@app.route('/index', methods=['GET'])
-def get_x():
-    return render_template('index.html')
+
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
@@ -32,3 +30,6 @@ if __name__ == '__main__':
 
 
 
+@app.route('/index', methods=['GET'])
+def get_x():
+    return render_template('index.html')
