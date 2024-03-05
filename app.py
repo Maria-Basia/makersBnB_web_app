@@ -30,6 +30,6 @@ if __name__ == '__main__':
 
 
 
-@app.route('/index', methods=['GET'])
+@app.route('/inde', methods=['GET'])
 def get_x():
     return render_template('index.html')
