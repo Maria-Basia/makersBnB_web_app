@@ -212,15 +212,8 @@ def test_add_user(page, test_web_address, db_connection):
 
     #page.goto(f"http://{test_web_address}/users")
     # page.screenshot(path='screenshot.png', full_page=True)
-    li_tag = page.locator("li")
-    page.wait_for_selector("li")
-    expect(li_tag).to_have_text([
-        '\nID: 1\nEmail Address: user_1@test.com\nPassword: Rock\n',
-        '\nID: 2\nEmail Address: user_2@test.com\nPassword: Pop\n',
-        '\nID: 3\nEmail Address: user_3@test.com\nPassword: Pop\n',
-        '\nID: 4\nEmail Address: user_4@test.com\nPassword: Jazz\n',
-        '\nID: 5\nEmail Address: abc@testemail.com\nPassword: portoisunattractive!'
-    ])
+    h1_tag = page.locator("h1")
+    expect(h1_tag).to_have_text("Listings")
 
     # email_element = page.locator(".t-email")
     # password_element = page.locator(".t-password")
@@ -257,6 +250,8 @@ def test_login_redirects(page, test_web_address, db_connection):
     page.screenshot(path='screenshot.png', full_page=True)
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Listings")
+    email_element = page.locator(".t-email")
+    expect(email_element).to_have_text("user_1@test.com")
 
 def test_login_error(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")

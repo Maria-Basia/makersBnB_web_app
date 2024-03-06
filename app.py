@@ -1,14 +1,17 @@
 import os
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, session
 from lib.database_connection import get_flask_database_connection
 from lib.space import Space
 from lib.space_repository import SpaceRepository
 from lib.space_parameters_validator import SpaceParametersValidator
 from lib.user_repository import UserRepository
 from lib.user import User
+import secrets
 
 # Create a new Flask app
 app = Flask(__name__)
+
+app.secret_key = secrets.token_hex(24)
 
 # == Your Routes Here ==
 
@@ -24,7 +27,12 @@ def get_all_spaces():
     connection = get_flask_database_connection(app)
     repository = SpaceRepository(connection)
     spaces = repository.all()
-    return render_template("spaces/index.html", spaces=spaces)
+    if 'user_id' in session and 'email_address' in session:
+        user_id = session['user_id']
+        email_address = session['email_address']
+        return render_template("spaces/index.html", spaces=spaces, email_address=email_address)
+    else:
+        redirect('/Login')
 
 @app.route('/index/<id>')
 def get_space(id):
@@ -64,14 +72,6 @@ def create_space():
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
 # if started in test mode.
-
-
-    
-
-
-
-
-
 
 
 
@@ -213,23 +213,38 @@ def get_user_login():
     return render_template('login.html')
     
 
+# @app.route('/Login', methods=['POST'])
+# def post_user_login():
+#     connection = get_flask_database_connection(app)
+#     user_repository = UserRepository(connection)
+#     email_address = request.form['email_address']
+#     password = request.form['password']
+#     user_found = user_repository.validate_login(email_address, password)
+#     #if not user_found:
+#     #    return render_template('login.html', error="Email or Password not found"), 400
+#     return redirect('/index')
+
+
+
+
+
 @app.route('/Login', methods=['POST'])
-def post_user_login():
-    connection = get_flask_database_connection(app)
-    user_repository = UserRepository(connection)
+def login_post():
     email_address = request.form['email_address']
     password = request.form['password']
-    user_found = user_repository.find(email_address, password)
+
+    connection = get_flask_database_connection(app)
+    user_repository = UserRepository(connection)
+    session_v = user_repository.find(email_address, password)
+    user_found = user_repository.validate_login(email_address, password)
     if not user_found:
         return render_template('login.html', error="Email or Password not found"), 400
-    return redirect('/index')
+    else:
+        # Set the user ID in session
+        session['user_id'] = session_v.id
+        session['email_address'] = session_v.email_address
 
-
-
-
-
-
-
+        return redirect('/index')
 
 
 
