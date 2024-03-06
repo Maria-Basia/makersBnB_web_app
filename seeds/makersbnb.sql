@@ -27,11 +27,22 @@ CREATE TABLE spaces (
     price float,
     date_from date,
     date_to date,
+    available_dates VARCHAR(255)[],
 -- The foreign key name is always {other_table_singular}_id
     user_id int,
     constraint fk_user foreign key(user_id)
     references users(id)
     on delete cascade
+);
+
+CREATE SEQUENCE IF NOT EXISTS bookings_id_seq;
+CREATE TABLE bookings (
+    id SERIAL PRIMARY KEY,
+    date_from DATE,
+    date_to DATE,
+    user_id int,
+    space_id int
+
 );
 
 
@@ -51,4 +62,5 @@ INSERT INTO spaces (name, description, price, date_from, date_to, user_id) VALUE
 INSERT INTO spaces (name, description, price, date_from, date_to, user_id) VALUES ('space_2', 'description_2', 14000.99, DATE '2003-03-11', DATE '2002-02-03', 2);    
 
 
-
+INSERT INTO bookings (date_from, date_to, user_id, space_id) VALUES ('2024/03/10', '2024/03/12', 1, 1);
+INSERT INTO bookings (date_from, date_to, user_id, space_id) VALUES ('2024/03/20', '2024/04/01', 2, 2);
