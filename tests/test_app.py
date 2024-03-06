@@ -254,5 +254,6 @@ def test_login_redirects(page, test_web_address, db_connection):
     page.fill("input[name='email_address']", "user_1@test.com")
     page.fill("input[name='password']", "Rock")
     page.click("input[value='Login']")
+    page.screenshot(path='screenshot.png', full_page=True)
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Listings")
