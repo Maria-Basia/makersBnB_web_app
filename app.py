@@ -161,16 +161,29 @@ def post_new_user():
     password = request.form['password']
     user = User(None, email_address, password)
     if not user.password_is_valid() or not user.email_is_valid():
-        return render_template('homepage.html', user=user, users=user.generate_errors()), 400
+        return render_template('homepage.html', user=user, errors=user.generate_errors()), 400
     user = user_repository.add(user)
     return redirect('/users')
 
-@app.route('/users', methods = ['GET'])
+@app.route('/users', methods=['GET'])
 def get_users():
     connection = get_flask_database_connection(app)
     user_repository = UserRepository(connection)
     users = user_repository.all()
     return render_template("users_list.html", users = users) 
+
+@app.route('/Login', methods=['POST'])
+def post_new_user():
+    connection = get_flask_database_connection(app)
+    user_repository = UserRepository(connection)
+    email_address = request.form['email_address']
+    password = request.form['password']
+    user = User(None, email_address, password)
+    #if not user.password_is_valid() or not user.email_is_valid():
+    #    return render_template('homepage.html', user=user, errors=user.generate_errors()), 400
+    
+    return redirect('/index')
+
 
 
 
