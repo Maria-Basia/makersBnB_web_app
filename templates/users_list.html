@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MakersBnB</title>
+
+
+        <!--
+            Head to https://github.com/makersacademy/web-applications-in-python/blob/main/pills/loading_css_or_static_files.md
+            If you're wondering how the CSS file below is being loaded.
+        -->
+        <link rel="stylesheet" href="/static/style.css" >
+    </head>
+    <body>
+        <h1>
+            Users
+        </h1>
+        <h2>hello</h2>
+        {% for user in users %}
+        <ul>
+<li>
+<p>ID: {{user.id}}</p>
+<p>Email Address: {{user.email_address}}</p>
+<p>Password: {{user.password}}</p>
+</li>
+        </ul>    
+        {% endfor %}
+    </body>
+</html>
