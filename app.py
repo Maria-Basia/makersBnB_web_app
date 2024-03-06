@@ -45,7 +45,9 @@ def create_space():
     validator = SpaceParametersValidator(
         request.form['name'],
         request.form['description'],
-        request.form['price']
+        request.form['price'],
+        request.form['date_from'],
+        request.form['date_to']
     )
 
     if not validator._is_valid():
@@ -56,6 +58,8 @@ def create_space():
         validator.get_valid_name(),
         validator.get_valid_description(),
         validator.get_valid_price(),
+        validator.get_valid_date_from(),
+        validator.get_valid_date_to(),
         1)
     repository.create(space)
 
