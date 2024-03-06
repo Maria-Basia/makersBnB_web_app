@@ -199,7 +199,7 @@ def post_new_user():
     if not user.password_is_valid() or not user.email_is_valid():
         return render_template('homepage.html', user=user, errors=user.generate_errors()), 400
     user = user_repository.add(user)
-    return redirect('/users')
+    return redirect('/index')
 
 @app.route('/users', methods=['GET'])
 def get_users():
@@ -221,7 +221,7 @@ def post_user_login():
     password = request.form['password']
     user_found = user_repository.find(email_address, password)
     if not user_found:
-        return render_template('login.html', error="Email or Password incorrect"), 400
+        return render_template('login.html', error="Email or Password not found"), 400
     return redirect('/index')
 
 

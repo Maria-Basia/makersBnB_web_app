@@ -14,11 +14,7 @@
         <h2> LOG IN TO MAKERS BNB</h2>
         <form action="/Login" method="post">
 
-            {% if errors %}
-                <p class ="t-errors">
-                    There were errors with your submission: {{errors}}
-                </p>
-            {% endif %}
+
             
             <p class = "t-email">
                 <label for="email_address">Email Address</label>
@@ -32,6 +28,13 @@
                 
                 <input type="submit" value="Login">
             </p>
+        
+        {% if error %}
+            <p class ="t-error">
+                {{error}}
+            </p>
+        {% endif %}
+        
         </form>
     </body>
 </html>
