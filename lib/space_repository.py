@@ -26,7 +26,7 @@ class SpaceRepository:
     def create(self, space):
         rows = self._connection.execute(
             'INSERT INTO spaces (name, description, price, user_id) VALUES (%s, %s, %s, %s) RETURNING id',
-            [space.name, space.description, space.price, space.user_id]
+            [space.name, space.description, round(float(space.price), 2), space.user_id]
             )
         row = rows[0]
         space.id = row["id"]
