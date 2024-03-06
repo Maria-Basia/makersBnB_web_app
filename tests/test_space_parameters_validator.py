@@ -1,54 +1,81 @@
 import pytest
 
-from lib.space_parameters_validator import AlbumParametersValidator
+from lib.space_parameters_validator import SpaceParametersValidator
 
 def test_is_valid():
-    validator = AlbumParametersValidator("My Title", "1990")
-    assert validator.is_valid() == True
+    validator = SpaceParametersValidator("Space_4", "Description_4", "345")
+    assert validator._is_valid() == True
 
-def test_is_not_valid_with_bad_title():
-    validator_1 = AlbumParametersValidator("", "1990")
-    assert validator_1.is_valid() == False
-    validator_2 = AlbumParametersValidator("My Title", None)
-    assert validator_2.is_valid() == False
-    validator_3 = AlbumParametersValidator("My Title", "fred")
-    assert validator_3.is_valid() == False
+def test_is_not_valid_with_bad_name():
+    validator_1 = SpaceParametersValidator("", "Description_5", "345.5")
+    assert validator_1._is_valid() == False
+    validator_2 = SpaceParametersValidator(None, "Description_6", "56.5")
+    assert validator_2._is_valid() == False
+
+def test_is_not_valid_with_bad_description():
+    validator_1 = SpaceParametersValidator("Space_8", "", "345.5")
+    assert validator_1._is_valid() == False
+    validator_2 = SpaceParametersValidator("Space_9", None, "56.5")
+    assert validator_2._is_valid() == False
+
+def test_is_not_valid_with_bad_price():
+    validator_1 = SpaceParametersValidator("Space_8", "Description_8", "")
+    assert validator_1._is_valid() == False
+    validator_2 = SpaceParametersValidator("Space_9", "Description_9", None)
+    assert validator_2._is_valid() == False
+
 
 
 def test_generate_errors():
-    validator_1 = AlbumParametersValidator("", "")
+    validator_1 = SpaceParametersValidator("", "", "")
     assert validator_1.generate_errors() == [
-        "Title must not be blank",
-        "Release year must be a number"
+        "Name must not be blank",
+        "Description must not be blank",
+        "Price must be a number"
     ]
-
-    validator_2 = AlbumParametersValidator("Title", "")
+    validator_2 = SpaceParametersValidator("", "Description_9", "56.5")
     assert validator_2.generate_errors() == [
-        "Release year must be a number"
+        "Name must not be blank"
     ]
 
-    validator_3 = AlbumParametersValidator("", "1990")
+    validator_3 = SpaceParametersValidator("Space_8", "", "456")
     assert validator_3.generate_errors() == [
-        "Title must not be blank"
+        "Description must not be blank"
     ]
 
-def test_get_valid_title_if_title_valid():
-    validator_1 = AlbumParametersValidator("Title", "")
-    assert validator_1.get_valid_title() == "Title"
+    validator_4 = SpaceParametersValidator("Space_8", "Description_8", "")
+    assert validator_4.generate_errors() == [
+        "Price must be a number"
+    ]
 
-def test_get_valid_title_refuses_if_invalid():
-    validator_1 = AlbumParametersValidator("", "")
+def test_get_valid_name_if_name_valid():
+    validator_1 = SpaceParametersValidator("space_1", "Description_1", "789")
+    assert validator_1.get_valid_name() == "space_1"
+
+def test_get_valid_name_refuses_if_invalid():
+    validator_1 = SpaceParametersValidator("", "Description_1", "567")
     with pytest.raises(ValueError) as err:
-        validator_1.get_valid_title()
-    assert str(err.value) == "Cannot get valid title"
+        validator_1.get_valid_name()
+    assert str(err.value) == "Cannot get valid name"
 
 
-def test_get_valid_release_year_if_release_year_valid():
-    validator_1 = AlbumParametersValidator("Title", "1990")
-    assert validator_1.get_valid_release_year() == "1990"
+def test_get_valid_description_if_description_valid():
+    validator_1 = SpaceParametersValidator("Title", "Description", "87")
+    assert validator_1.get_valid_description() == "Description"
 
-def test_get_valid_release_year_refuses_if_invalid():
-    validator_1 = AlbumParametersValidator("Title","")
+def test_get_valid_description_refuses_if_invalid():
+    validator_1 = SpaceParametersValidator("Title","", "654")
     with pytest.raises(ValueError) as err:
-        validator_1.get_valid_release_year()
-    assert str(err.value) == "Cannot get valid release year"
+        validator_1.get_valid_description()
+    assert str(err.value) == "Cannot get valid description"
+
+
+def test_get_valid_price_if_price_valid():
+    validator_1 = SpaceParametersValidator("Title", "Description", "87")
+    assert validator_1.get_valid_price() == "87"
+
+def test_get_valid_price_refuses_if_invalid():
+    validator_1 = SpaceParametersValidator("Title","Description", "")
+    with pytest.raises(ValueError) as err:
+        validator_1.get_valid_price()
+    assert str(err.value) == "Cannot get valid price"

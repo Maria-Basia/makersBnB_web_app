@@ -97,7 +97,8 @@ Replace the relevant bits in this example with your own:
 -- Create the table without the foreign key first.
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  name text
+  email_address text
+  password text
 
 );
 
@@ -108,9 +109,9 @@ CREATE TABLE spaces (
   description text,
   price decimal (7, 2)
 -- The foreign key name is always {other_table_singular}_id
-  artist_id int,
-  constraint fk_artist foreign key(artist_id)
-    references artists(id)
+  user_id int,
+  constraint fk_user foreign key(user_id)
+    references users(id)
     on delete cascade
 );
 
