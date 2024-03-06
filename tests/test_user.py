@@ -14,4 +14,15 @@ def test_users_are_equal():
 def test_user_format():
     user = User(1, "email_1", "password_1") 
     assert str(user) == "User(1, email_1, password_1)" 
+
+def test_is_email_valid():
+    user = User(1, "emailtest", "password_1")
+    assert user.generate_errors() == "not valid email, not valid password"
+
+def test_if_email_password_blank():
+    user = User(None, "", "")
+    assert user.generate_errors() == "not valid email, not valid password"
+
+
+    
     
