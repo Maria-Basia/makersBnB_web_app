@@ -254,5 +254,16 @@ def test_login_redirects(page, test_web_address, db_connection):
     page.fill("input[name='email_address']", "user_1@test.com")
     page.fill("input[name='password']", "Rock")
     page.click("input[value='Login']")
+    page.screenshot(path='screenshot.png', full_page=True)
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Listings")
+
+def test_login_error(page, test_web_address, db_connection):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/Login")
+    page.fill("input[name='email_address']", "user1test.com")
+    page.fill("input[name='password']", "Ro")
+    page.click("input[value='Login']")
+    page.screenshot(path='screenshot.png', full_page=True)
+    error_tag = page.locator(".t-error")
+    expect(error_tag).to_have_text("Email or Password not found")
