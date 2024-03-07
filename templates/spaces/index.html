@@ -11,8 +11,10 @@
         <link rel="stylesheet" href="/static/style.css" >
     </head>
     <body>
-        <p class = "t-email">
-            {{email_address}}
+        <p class = "t-session_email">
+            {% if email_address %}
+                {{email_address}}
+            {% endif %}
         </p>
         <h1>
             Listings

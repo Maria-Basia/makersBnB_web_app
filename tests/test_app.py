@@ -24,7 +24,11 @@ def test_get_all_spaces(page, test_web_address, db_connection):
 
 def test_visit_space_show_page(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")
-    page.goto(f"http://{test_web_address}/index")
+    page.goto(f"http://{test_web_address}/Login")
+    page.fill("input[name='email_address']", "user_1@test.com")
+    page.fill("input[name='password']", "Rock")
+    page.click("input[value='Login']")
+    #page.goto(f"http://{test_web_address}/index")
     page.click("text='space_1'")
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Name: space_1")
@@ -33,7 +37,11 @@ def test_visit_space_show_page(page, test_web_address, db_connection):
 
 def test_create_album(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")
-    page.goto(f"http://{test_web_address}/index")
+    page.goto(f"http://{test_web_address}/Login")
+    page.fill("input[name='email_address']", "user_1@test.com")
+    page.fill("input[name='password']", "Rock")
+    page.click("input[value='Login']")
+    #page.goto(f"http://{test_web_address}/index")
     page.click("text='Create a new listing'")
 
     page.fill("input[name=name]", "space_3")
@@ -211,7 +219,7 @@ def test_add_user(page, test_web_address, db_connection):
     page.click("input[value='Sign Up']")
 
     #page.goto(f"http://{test_web_address}/users")
-    # page.screenshot(path='screenshot.png', full_page=True)
+    page.screenshot(path='screenshot.png', full_page=True)
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Listings")
 

@@ -32,7 +32,7 @@ def get_all_spaces():
         email_address = session['email_address']
         return render_template("spaces/index.html", spaces=spaces, email_address=email_address)
     else:
-        redirect('/Login')
+        return render_template("spaces/index.html", spaces=spaces)
 
 @app.route('/index/<id>')
 def get_space(id):
@@ -198,8 +198,12 @@ def post_new_user():
     user = User(None, email_address, password)
     if not user.password_is_valid() or not user.email_is_valid():
         return render_template('homepage.html', user=user, errors=user.generate_errors()), 400
-    user = user_repository.add(user)
-    return redirect('/index')
+    else:
+        user_repository.add(user)
+        session['user_id'] = user.id
+        session['email_address'] = user.email_address
+
+        return redirect('/index')
 
 @app.route('/users', methods=['GET'])
 def get_users():

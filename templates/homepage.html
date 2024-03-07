@@ -1,38 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>MakersBnB</title>
-        <meta charset="utf-8">
+<head>
+    <title>MakersBnB</title>
+    <meta charset="utf-8">
 
-        <!--
-            Head to https://github.com/makersacademy/web-applications-in-python/blob/main/pills/loading_css_or_static_files.md
-            If you're wondering how the CSS file below is being loaded.
-        -->
-        <link rel="stylesheet" href="/static/style.css" >
-    </head>
-    <body>
-        <h2> SIGN UP TO MAKERS BNB</h2>
-        <form action="/MakersBNB" method="post">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Your custom CSS file -->
+    <link rel="stylesheet" href="/static/style.css">
 
-            {% if errors %}
-                <p class ="t-errors">
-                    There were errors with your submission: {{errors}}
-                </p>
-            {% endif %}
-            
-            <p class = "t-email">
-                <label for="email_address">Email Address</label>
-                <input type="text" name="email_address" id="email_address">
-            </p>
-            <p class = "t-password">
-                <label for="password">Password</label>
-                <input type="text" name="password" id="password">
-            </p>
-            <p>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .split-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .left-side {
+            flex: 1;
+            background-image: url('https://z.cdrst.com/foto/hotel-sf/b2ac/granderesp/hilton-los-cabos-entorno-11668c96.jpg');
+            background-size: cover;
+            position: relative;
+        }
+
+        .right-side {
+            flex: 1;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            flex-direction: column;
+        }
+
+        h2 {
+            color: #a55be1;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            display: none;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 20px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #a55be1;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #fff;
+            color: #a55be1;
+            border: solid #a55be1;
+        }
+
+        .t-errors {
+            color: #dc3545;
+            margin-bottom: 20px;
+        }
+
+        p a {
+            color: #a55be1;
+        }
+    </style>
+</head>
+<body>
+    <div class="split-container">
+        <div class="left-side"></div>
+        <div class="right-side">
+            <h2>SIGN UP TO MAKERS BNB</h2>
+            <form action="/MakersBNB" method="post">
                 
-                <input type="submit" value="Sign Up">
-            </p>
-        </form>
-        <p>If you are already signed up login <a href="/Login">Here</a></p>
-    </body>
+                <!-- ERRORS REMOVED FOR TEMPLATE VIEW
+                {% if errors %}
+                    <p class="t-errors">There were errors with your submission: {{errors}}</p>
+                {% endif %}
+                -->
+
+                <p class="t-email">
+                    <label for="email_address">Email Address</label>
+                    <input type="text" name="email_address" id="email_address" placeholder="Email Address">
+                </p>
+                
+                <p class="t-password">
+                    <label for="password">Password</label>
+                    <input type="text" name="password" id="password" placeholder="Password">
+                </p>
+                
+                <p>
+                    <input type="submit" value="Sign Up">
+                </p>
+            
+                <div style="text-align: center; padding-top: 20px">
+                    If you are already signed up login <a href="/Login" style="color: #a55be1;">Here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
