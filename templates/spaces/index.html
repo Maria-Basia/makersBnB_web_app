@@ -11,6 +11,11 @@
         <link rel="stylesheet" href="/static/style.css" >
     </head>
     <body>
+        <p class = "t-session_email">
+            {% if email_address %}
+                {{email_address}}
+            {% endif %}
+        </p>
         <h1>
             Listings
         </h1>

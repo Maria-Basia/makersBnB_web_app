@@ -24,7 +24,11 @@ def test_get_all_spaces(page, test_web_address, db_connection):
 
 def test_visit_space_show_page(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")
-    page.goto(f"http://{test_web_address}/index")
+    page.goto(f"http://{test_web_address}/Login")
+    page.fill("input[name='email_address']", "user_1@test.com")
+    page.fill("input[name='password']", "Rock")
+    page.click("input[value='Login']")
+    #page.goto(f"http://{test_web_address}/index")
     page.click("text='space_1'")
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Name: space_1")
@@ -33,7 +37,11 @@ def test_visit_space_show_page(page, test_web_address, db_connection):
 
 def test_create_album(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")
-    page.goto(f"http://{test_web_address}/index")
+    page.goto(f"http://{test_web_address}/Login")
+    page.fill("input[name='email_address']", "user_1@test.com")
+    page.fill("input[name='password']", "Rock")
+    page.click("input[value='Login']")
+    #page.goto(f"http://{test_web_address}/index")
     page.click("text='Create a new listing'")
 
     page.fill("input[name=name]", "space_3")
@@ -206,21 +214,15 @@ def test_add_user(page, test_web_address, db_connection):
     page.goto(f"http://{test_web_address}/MakersBNB")
     page.fill("input[name='email_address']", "abc@testemail.com")
     page.fill("input[name='password']", "portoisunattractive!")
+    page.fill("input[name='confirm_password']", "portoisunattractive!")
     #page.wait_for_selector("button:has-text('Sign Up')")
     #page.click("text=Sign Up")
     page.click("input[value='Sign Up']")
 
     #page.goto(f"http://{test_web_address}/users")
-    # page.screenshot(path='screenshot.png', full_page=True)
-    li_tag = page.locator("li")
-    page.wait_for_selector("li")
-    expect(li_tag).to_have_text([
-        '\nID: 1\nEmail Address: user_1@test.com\nPassword: Rock\n',
-        '\nID: 2\nEmail Address: user_2@test.com\nPassword: Pop\n',
-        '\nID: 3\nEmail Address: user_3@test.com\nPassword: Pop\n',
-        '\nID: 4\nEmail Address: user_4@test.com\nPassword: Jazz\n',
-        '\nID: 5\nEmail Address: abc@testemail.com\nPassword: portoisunattractive!'
-    ])
+    page.screenshot(path='screenshot.png', full_page=True)
+    h1_tag = page.locator("h1")
+    expect(h1_tag).to_have_text("Listings")
 
     # email_element = page.locator(".t-email")
     # password_element = page.locator(".t-password")
@@ -244,6 +246,7 @@ def test_add_user_error(page, test_web_address, db_connection):
     page.goto(f"http://{test_web_address}/MakersBNB")
     page.fill("input[name='email_address']", "abctestemail.com")
     page.fill("input[name='password']", "portoisunattractive")
+    page.fill("input[name='confirm_password']", "portoisunattractive")
     page.click("input[value='Sign Up']")
     errors = page.locator(".t-errors")
     expect(errors).to_have_text("There were errors with your submission: not valid email, not valid password")
@@ -257,6 +260,8 @@ def test_login_redirects(page, test_web_address, db_connection):
     page.screenshot(path='screenshot.png', full_page=True)
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Listings")
+    email_element = page.locator(".t-session_email")
+    expect(email_element).to_have_text("user_1@test.com")
 
 def test_login_error(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")
@@ -267,3 +272,15 @@ def test_login_error(page, test_web_address, db_connection):
     page.screenshot(path='screenshot.png', full_page=True)
     error_tag = page.locator(".t-error")
     expect(error_tag).to_have_text("Email or Password not found")
+
+def test_add_user_password_error(page, test_web_address, db_connection):
+    db_connection.seed("seeds/makersbnb.sql")
+    page.goto(f"http://{test_web_address}/MakersBNB")
+    page.fill("input[name='email_address']", "abc@testemail.com")
+    page.fill("input[name='password']", "portoisunattractive!")
+    page.fill("input[name='confirm_password']", "porto!")
+    page.click("input[value='Sign Up']")
+    page.screenshot(path='screenshot.png', full_page=True)
+    error_tag = page.locator(".t-errors")
+    expect(error_tag).to_have_text("There were errors with your submission: passwords do not match")
+
