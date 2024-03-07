@@ -57,7 +57,8 @@ def create_space():
         request.form['description'],
         request.form['price'],
         request.form['date_from'],
-        request.form['date_to']
+        request.form['date_to'],
+        request.form['image_url']
     )
 
     if not validator._is_valid():

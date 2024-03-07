@@ -1,11 +1,11 @@
 class SpaceParametersValidator:
-    def __init__(self, name, description, price, date_from, date_to):
+    def __init__(self, name, description, price, date_from, date_to, image_url):
         self.name = name
         self.description = description
         self.price = price
         self.date_from = date_from
         self.date_to = date_to
-
+        self.image_url = image_url
 
     def _is_valid(self):
         return self._is_name_valid() and self._is_description_valid() and self._is_price_valid()
