@@ -197,7 +197,9 @@ def post_new_user():
     password = request.form['password']
     confirm_password = request.form['confirm_password']
     user = User(None, email_address, password)
-    if password != confirm_password:
+    if user_repository.validate_email(email_address):
+        return render_template('homepage.html', user=user, errors="email already in use"), 400
+    elif password != confirm_password:
         return render_template('homepage.html', user=user, errors="passwords do not match"), 400
     elif not user.password_is_valid() or not user.email_is_valid() or not password == confirm_password:
         return render_template('homepage.html', user=user, errors=user.generate_errors()), 400

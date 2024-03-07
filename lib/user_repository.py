@@ -18,6 +18,12 @@ class UserRepository:
             return False
         return True
     
+    def validate_email(self, email_address):
+        rows = self._connection.execute('SELECT * FROM users WHERE email_address = %s', [email_address])
+        if rows == []:
+            return False
+        return True
+    
     def find(self, email_address, password):
         rows = self._connection.execute('SELECT * FROM users WHERE email_address = %s AND password = %s', [email_address, password])
         if rows == []:
