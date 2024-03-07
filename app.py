@@ -5,6 +5,8 @@ from lib.space import Space
 from lib.space_repository import SpaceRepository
 from lib.space_parameters_validator import SpaceParametersValidator
 from lib.user_repository import UserRepository
+from lib.booking import Booking
+from lib.booking_repository import BookingRepository
 from lib.user import User
 import secrets
 
@@ -53,7 +55,9 @@ def create_space():
     validator = SpaceParametersValidator(
         request.form['name'],
         request.form['description'],
-        request.form['price']
+        request.form['price'],
+        request.form['date_from'],
+        request.form['date_to']
     )
 
     if not validator._is_valid():
@@ -64,6 +68,8 @@ def create_space():
         validator.get_valid_name(),
         validator.get_valid_description(),
         validator.get_valid_price(),
+        validator.get_valid_date_from(),
+        validator.get_valid_date_to(),
         1)
     repository.create(space)
 
@@ -73,6 +79,39 @@ def create_space():
 # They also start the server configured to use the test database
 # if started in test mode.
 
+@app.route('/booking_confirmation', methods=['GET'])
+def get_booking_confirmation_page():
+    return render_template("spaces/booking_confirmation.html")
+
+
+
+@app.route('/index', methods=['POST'])
+def create_booking():
+    connection = get_flask_database_connection(app)
+    repository = BookingRepository(connection)
+
+    date_chosen = request.form['selected_date']
+
+    booking = Booking(
+        None,
+        date_chosen,
+        1,
+        1)
+    repository.create(booking)
+    return redirect(f"/booking_confirmation")
+
+
+
+
+# @app.route('/index/<id>')
+# def get_space(id):
+#     connection = get_flask_database_connection(app)
+#     repository = SpaceRepository(connection)
+#     space = repository.find(id)
+#     requested_date = request.form['requested_date']
+#     repository.select_date(id)
+
+#     return render_template("spaces/show.html", space=space)
 
 
 
