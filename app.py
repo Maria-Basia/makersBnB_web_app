@@ -87,15 +87,15 @@ def get_booking_confirmation_page():
     user_id = session.get('user_id')
     date_chosen = request.form['selected_date']
     space_id = request.form['space_id']
-
-
+    space_repository = SpaceRepository(connection)
+    space = space_repository.find(space_id)
     booking = Booking(
         None,
         date_chosen,
         user_id,
         space_id)
     repository.create(booking)
-    return render_template("spaces/booking_confirmation.html")
+    return render_template("spaces/booking_confirmation.html", booking=booking, space=space)
 
 
 
