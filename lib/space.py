@@ -18,3 +18,8 @@ class Space():
     
     def __repr__(self):
         return f"Space({self.id}, {self.name}, {self.description}, {self.price}, {self.date_from}, {self.date_to}, {self.user_id})"
+    
+
+    # <a href="/booking_confirmation" class="button-link">
+    #       <input type="button" value="Confirm your booking">
+    #   </a>

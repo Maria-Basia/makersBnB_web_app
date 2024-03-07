@@ -5,6 +5,8 @@ from lib.space import Space
 from lib.space_repository import SpaceRepository
 from lib.space_parameters_validator import SpaceParametersValidator
 from lib.user_repository import UserRepository
+from lib.booking import Booking
+from lib.booking_repository import BookingRepository
 from lib.user import User
 
 # Create a new Flask app
@@ -69,18 +71,39 @@ def create_space():
 # They also start the server configured to use the test database
 # if started in test mode.
 
+@app.route('/booking_confirmation', methods=['GET'])
+def get_booking_confirmation_page():
+    return render_template("spaces/booking_confirmation.html")
 
 
-@app.route('/index/<id>')
-def get_space(id):
+
+@app.route('/index', methods=['POST'])
+def create_booking():
     connection = get_flask_database_connection(app)
-    repository = SpaceRepository(connection)
-    space = repository.find(id)
-    space = repository.select_date(id)
-    requested_date = request.form['requested_date']
-    print(requested_date)
+    repository = BookingRepository(connection)
 
-    return render_template("spaces/show.html", space=space)
+    date_chosen = request.form['selected_date']
+
+    booking = Booking(
+        None,
+        date_chosen,
+        1,
+        1)
+    repository.create(booking)
+    return redirect(f"/booking_confirmation")
+
+
+
+
+# @app.route('/index/<id>')
+# def get_space(id):
+#     connection = get_flask_database_connection(app)
+#     repository = SpaceRepository(connection)
+#     space = repository.find(id)
+#     requested_date = request.form['requested_date']
+#     repository.select_date(id)
+
+#     return render_template("spaces/show.html", space=space)
 
 
 

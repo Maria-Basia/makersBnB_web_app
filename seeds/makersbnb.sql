@@ -6,7 +6,7 @@
 -- First, we must delete (drop) all our tables
 DROP TABLE IF EXISTS users CASCADE;
 DROP SEQUENCE IF EXISTS users_id_seq;
-DROP TABLE IF EXISTS spaces;
+DROP TABLE IF EXISTS spaces CASCADE;
 DROP SEQUENCE IF EXISTS spaces_id_seq;
 DROP TABLE IF EXISTS bookings;
 DROP SEQUENCE IF EXISTS bookings_id_seq;
@@ -40,11 +40,15 @@ CREATE TABLE spaces (
 CREATE SEQUENCE IF NOT EXISTS bookings_id_seq;
 CREATE TABLE bookings (
     id SERIAL PRIMARY KEY,
-    date_from DATE,
-    date_to DATE,
+    selected_date VARCHAR(255),
     user_id int,
-    space_id int
-
+    constraint fk_space_user foreign key(user_id)
+    references users(id)
+    on delete cascade,
+    space_id int,
+    constraint fk_space foreign key(space_id)
+    references spaces(id)
+    on delete cascade
 );
 
 
@@ -64,5 +68,5 @@ INSERT INTO spaces (name, description, price, date_from, date_to, available_date
 INSERT INTO spaces (name, description, price, date_from, date_to, user_id) VALUES ('space_2', 'description_2', 14000.99, DATE '2003-03-11', DATE '2002-02-03', 2);    
 
 
-INSERT INTO bookings (date_from, date_to, user_id, space_id) VALUES ('2024/03/10', '2024/03/12', 1, 1);
-INSERT INTO bookings (date_from, date_to, user_id, space_id) VALUES ('2024/03/20', '2024/04/01', 2, 2);
+INSERT INTO bookings (selected_date, user_id, space_id) VALUES ('2024-03-24', 1, 1);
+-- INSERT INTO bookings (date_from, date_to, user_id, space_id) VALUES ('2024/03/20', '2024/04/01', 2, 2);
