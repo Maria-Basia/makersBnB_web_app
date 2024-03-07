@@ -51,6 +51,7 @@ def get_space_new():
 def create_space():
     connection = get_flask_database_connection(app)
     repository = SpaceRepository(connection)
+    user_id = session.get('user_id')
 
     validator = SpaceParametersValidator(
         request.form['name'],
@@ -70,7 +71,7 @@ def create_space():
         validator.get_valid_price(),
         validator.get_valid_date_from(),
         validator.get_valid_date_to(),
-        1)
+        user_id)
     repository.create(space)
 
     return redirect(f"/index/{space.id}")
@@ -79,26 +80,40 @@ def create_space():
 # They also start the server configured to use the test database
 # if started in test mode.
 
-@app.route('/booking_confirmation', methods=['GET'])
+@app.route('/booking', methods=['POST'])
 def get_booking_confirmation_page():
-    return render_template("spaces/booking_confirmation.html")
-
-
-
-@app.route('/index', methods=['POST'])
-def create_booking():
     connection = get_flask_database_connection(app)
     repository = BookingRepository(connection)
-
+    user_id = session.get('user_id')
     date_chosen = request.form['selected_date']
-
+    space_id = request.form['space_id']
+    space_repository = SpaceRepository(connection)
+    space = space_repository.find(space_id)
     booking = Booking(
         None,
         date_chosen,
-        1,
-        1)
+        user_id,
+        space_id)
     repository.create(booking)
-    return redirect(f"/booking_confirmation")
+    return render_template("spaces/booking_confirmation.html", booking=booking, space=space)
+
+
+
+# @app.route('/index', methods=['POST'])
+# def create_booking():
+#     connection = get_flask_database_connection(app)
+#     repository = BookingRepository(connection)
+#     user_id = session.get('user_id')
+#     space_id = session.get('space_id')
+#     date_chosen = request.form['selected_date']
+
+#     booking = Booking(
+#         None,
+#         date_chosen,
+#         user_id,
+#         space_id)
+#     repository.create(booking)
+#     return redirect(f"/booking_confirmation")
 
 
 

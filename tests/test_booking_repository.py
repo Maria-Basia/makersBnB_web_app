@@ -19,6 +19,14 @@ I get all the Spaces back in the list"""
 #     repository = BookingRepository(db_connection)
 #     result = repository.find(1)
 #     assert result == Booking('2024/03/10', '2024/03/12', 1, 1)
+
+
+def test_all(db_connection):
+    db_connection.seed("seeds/makersbnb.sql")
+    repository = BookingRepository(db_connection)
+    assert repository.all() == [
+        Booking(1, '2024-03-24', 1, 1)
+    ]
     
 
 def test_create(db_connection):

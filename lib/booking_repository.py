@@ -6,11 +6,11 @@ class BookingRepository:
         self._connection = connection
         
     def all(self):
-        rows = self._connection.execute("SELECT * FROM bookings")
+        rows = self._connection.execute("SELECT bookings.id AS booking_id, bookings.selected_date, bookings.user_id, spaces.id AS space_id FROM bookings JOIN spaces ON spaces.id = bookings.space_id")
         bookings = []
         for row in rows:
             booking = Booking(
-                row["id"], 
+                row["booking_id"], 
                 row["selected_date"],
                 row["user_id"],
                 row["space_id"]
@@ -21,6 +21,7 @@ class BookingRepository:
             bookings.append(booking)
         print(bookings)
         return bookings
+    
     
     def find(self, id):
         rows = self._connection.execute("SELECT * FROM bookings WHERE id =%s", [id])

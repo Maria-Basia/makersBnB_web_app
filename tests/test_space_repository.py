@@ -9,8 +9,8 @@ def test_get_all_spaces(db_connection):
     repository = SpaceRepository(db_connection)
     result = repository.all()
     assert result == [
-        Space(1, "space_1", "description_1", 45.50, 1),
-        Space(2, "space_2", "description_2", 14000.99, 2)
+        Space(1, "space_1", "description_1", 45.50, "2004-04-22", "2005-05-24", 1),
+        Space(2, "space_2", "description_2", 14000.99, "2003-03-11", "2002-02-03", 2)
     ]
 
 
@@ -22,21 +22,21 @@ def test_find_space_with_id(db_connection):
     db_connection.seed("seeds/makersbnb.sql")
     repository = SpaceRepository(db_connection)
     result = repository.find(1)
-    assert result == Space(1, 'space_1', 'description_1', 45.50, 1)
+    assert result == Space(1, 'space_1', 'description_1', 45.50, "2004-04-22", "2005-05-24", 1)
 
 def test_create(db_connection):
     db_connection.seed("seeds/makersbnb.sql")
     repository = SpaceRepository(db_connection)
-    space = Space(None, "mybnb", "in beverley hills", 9000, 2)
+    space = Space(None, "mybnb", "in beverley hills", 9000, "2024-03-10", "2024-03-15", 2)
     repository.create(space)
     assert space.id == 3
     assert repository.all() == [
-        Space(1, "space_1", "description_1", 45.50, 1),
-        Space(2, "space_2", "description_2", 14000.99, 2),
-        Space(3, "mybnb", "in beverley hills", 9000.0, 2)
+        Space(1, "space_1", "description_1", 45.50, "2004-04-22", "2005-05-24", 1),
+        Space(2, "space_2", "description_2", 14000.99, "2003-03-11", "2002-02-03", 2),
+        Space(3, "mybnb", "in beverley hills", 9000.0, "2024-03-10", "2024-03-15", 2)
     ]
 
-def test_date(db_connection):
-    db_connection.seed("seeds/makersbnb.sql")
-    repository = SpaceRepository(db_connection)
-    repository.select_date(1)
+# def test_date(db_connection):
+#     db_connection.seed("seeds/makersbnb.sql")
+#     repository = SpaceRepository(db_connection)
+#     repository.select_date(1)
