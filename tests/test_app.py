@@ -258,7 +258,7 @@ def test_login_redirects(page, test_web_address, db_connection):
     page.screenshot(path='screenshot.png', full_page=True)
     h1_tag = page.locator("h1")
     expect(h1_tag).to_have_text("Listings")
-    email_element = page.locator(".t-email")
+    email_element = page.locator(".t-session_email")
     expect(email_element).to_have_text("user_1@test.com")
 
 def test_login_error(page, test_web_address, db_connection):
