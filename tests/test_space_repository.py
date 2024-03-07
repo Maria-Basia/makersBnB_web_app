@@ -35,3 +35,8 @@ def test_create(db_connection):
         Space(2, "space_2", "description_2", 14000.99, 2),
         Space(3, "mybnb", "in beverley hills", 9000.0, 2)
     ]
+
+def test_date(db_connection):
+    db_connection.seed("seeds/makersbnb.sql")
+    repository = SpaceRepository(db_connection)
+    repository.select_date(1)

@@ -70,7 +70,18 @@ def create_space():
 # if started in test mode.
 
 
-    
+
+@app.route('/index/<id>')
+def get_space(id):
+    connection = get_flask_database_connection(app)
+    repository = SpaceRepository(connection)
+    space = repository.find(id)
+    space = repository.select_date(id)
+    requested_date = request.form['requested_date']
+    print(requested_date)
+
+    return render_template("spaces/show.html", space=space)
+
 
 
 

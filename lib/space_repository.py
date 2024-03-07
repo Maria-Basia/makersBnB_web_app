@@ -39,3 +39,15 @@ class SpaceRepository:
         return None
 
 
+    def select_date(self, id, requested_date):
+        rows = self._connection.execute("SELECT available_dates FROM spaces WHERE id =%s", [id])
+        for element in rows:
+            dates = list(element.values())
+            print(dates[0])
+        available_dates = dates[0]
+        print(type(rows)) 
+        print("HERE!!!!!!!!!!")
+        print(rows)
+        # for row in rows:
+        #     if row == 
+        
