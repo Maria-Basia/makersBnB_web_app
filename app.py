@@ -195,8 +195,11 @@ def post_new_user():
     user_repository = UserRepository(connection)
     email_address = request.form['email_address']
     password = request.form['password']
+    confirm_password = request.form['confirm_password']
     user = User(None, email_address, password)
-    if not user.password_is_valid() or not user.email_is_valid():
+    if password != confirm_password:
+        return render_template('homepage.html', user=user, errors="passwords do not match"), 400
+    elif not user.password_is_valid() or not user.email_is_valid() or not password == confirm_password:
         return render_template('homepage.html', user=user, errors=user.generate_errors()), 400
     else:
         user_repository.add(user)

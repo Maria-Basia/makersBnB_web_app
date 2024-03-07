@@ -57,7 +57,6 @@
         }
 
         label {
-            font-weight: bold;
             display: none;
         }
 
@@ -67,6 +66,36 @@
             margin-bottom: 20px;
             border: 1px solid #ced4da;
             border-radius: 20px;
+        }
+        
+        .password-toggle-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .password-toggle{
+            position: absolute;
+            right: 20px;
+            top: 38%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .confirm-password-toggle{
+            position: absolute;
+            right: 20px;
+            top: 38%;
+            transform: translateY(-50%);
+            cursor: pointer;
         }
 
         input[type="submit"] {
@@ -113,9 +142,16 @@
                     <input type="text" name="email_address" id="email_address" placeholder="Email Address">
                 </p>
                 
-                <p class="t-password">
+                <p class="password-toggle-container">
                     <label for="password">Password</label>
-                    <input type="text" name="password" id="password" placeholder="Password">
+                    <input type="password" name="password" id="password" placeholder="Password">
+                    <span class="password-toggle" onclick="togglePasswordVisibility('password')">🔐</span>
+                </p>
+
+                <p class="password-toggle-container">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
+                    <span class="confirm-password-toggle" onclick="togglePasswordVisibility('confirm_password')">🔐</span>
                 </p>
                 
                 <p>
@@ -133,5 +169,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        }
+    </script>
 </body>
 </html>
