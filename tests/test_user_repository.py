@@ -16,13 +16,13 @@ def test_get_all_users(db_connection):
 def test_find_a_user(db_connection):
     db_connection.seed("seeds/makersbnb.sql")
     repository = UserRepository(db_connection)
-    user = repository.find('user_1@test.com', 'Rock')
+    user = repository.validate_login('user_1@test.com', 'Rock')
     assert user == True
 
 def test_no_user_found(db_connection):
     db_connection.seed("seeds/makersbnb.sql")
     repository = UserRepository(db_connection)
-    user = repository.find('user1@test.com', 'Fun')
+    user = repository.validate_login('user1@test.com', 'Fun')
     assert user == False
     
 def test_add_user_adds_to_table(db_connection):
@@ -37,3 +37,9 @@ def test_add_user_adds_to_table(db_connection):
     User(4, 'user_4@test.com', 'Jazz'),
     User(5, "email_13@gmail.com", "pass123")
     ]
+
+def test_find_gets_id(db_connection):
+    db_connection.seed("seeds/makersbnb.sql")
+    repository = UserRepository(db_connection)
+    
+    assert repository.find('user_1@test.com', 'Rock') == User(1, 'user_1@test.com', 'Rock')

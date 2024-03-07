@@ -24,5 +24,6 @@ def test_if_email_password_blank():
     assert user.generate_errors() == "not valid email, not valid password"
 
 
+
     
     

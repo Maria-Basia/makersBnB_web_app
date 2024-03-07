@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, session
 from lib.database_connection import get_flask_database_connection
 from lib.space import Space
 from lib.space_repository import SpaceRepository
@@ -8,9 +8,12 @@ from lib.user_repository import UserRepository
 from lib.booking import Booking
 from lib.booking_repository import BookingRepository
 from lib.user import User
+import secrets
 
 # Create a new Flask app
 app = Flask(__name__)
+
+app.secret_key = secrets.token_hex(24)
 
 # == Your Routes Here ==
 
@@ -26,7 +29,12 @@ def get_all_spaces():
     connection = get_flask_database_connection(app)
     repository = SpaceRepository(connection)
     spaces = repository.all()
-    return render_template("spaces/index.html", spaces=spaces)
+    if 'user_id' in session and 'email_address' in session:
+        user_id = session['user_id']
+        email_address = session['email_address']
+        return render_template("spaces/index.html", spaces=spaces, email_address=email_address)
+    else:
+        return render_template("spaces/index.html", spaces=spaces)
 
 @app.route('/index/<id>')
 def get_space(id):
@@ -214,13 +222,6 @@ def create_booking():
 
 
 
-
-
-
-
-
-
-
 #Users logic starts here
     
 @app.route('/MakersBNB', methods=['GET'])
@@ -233,11 +234,20 @@ def post_new_user():
     user_repository = UserRepository(connection)
     email_address = request.form['email_address']
     password = request.form['password']
+    confirm_password = request.form['confirm_password']
     user = User(None, email_address, password)
-    if not user.password_is_valid() or not user.email_is_valid():
+    if user_repository.validate_email(email_address):
+        return render_template('homepage.html', user=user, errors="email already in use"), 400
+    elif password != confirm_password:
+        return render_template('homepage.html', user=user, errors="passwords do not match"), 400
+    elif not user.password_is_valid() or not user.email_is_valid() or not password == confirm_password:
         return render_template('homepage.html', user=user, errors=user.generate_errors()), 400
-    user = user_repository.add(user)
-    return redirect('/index')
+    else:
+        user_repository.add(user)
+        session['user_id'] = user.id
+        session['email_address'] = user.email_address
+
+        return redirect('/index')
 
 @app.route('/users', methods=['GET'])
 def get_users():
@@ -251,23 +261,38 @@ def get_user_login():
     return render_template('login.html')
     
 
+# @app.route('/Login', methods=['POST'])
+# def post_user_login():
+#     connection = get_flask_database_connection(app)
+#     user_repository = UserRepository(connection)
+#     email_address = request.form['email_address']
+#     password = request.form['password']
+#     user_found = user_repository.validate_login(email_address, password)
+#     #if not user_found:
+#     #    return render_template('login.html', error="Email or Password not found"), 400
+#     return redirect('/index')
+
+
+
+
+
 @app.route('/Login', methods=['POST'])
-def post_user_login():
-    connection = get_flask_database_connection(app)
-    user_repository = UserRepository(connection)
+def login_post():
     email_address = request.form['email_address']
     password = request.form['password']
-    user_found = user_repository.find(email_address, password)
+
+    connection = get_flask_database_connection(app)
+    user_repository = UserRepository(connection)
+    session_v = user_repository.find(email_address, password)
+    user_found = user_repository.validate_login(email_address, password)
     if not user_found:
         return render_template('login.html', error="Email or Password not found"), 400
-    return redirect('/index')
+    else:
+        # Set the user ID in session
+        session['user_id'] = session_v.id
+        session['email_address'] = session_v.email_address
 
-
-
-
-
-
-
+        return redirect('/index')
 
 
 
