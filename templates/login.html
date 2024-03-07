@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>MakersBnB</title>
-        <meta charset="utf-8">
+<head>
+    <title>MakersBnB</title>
+    <meta charset="utf-8">
 
-        <!--
-            Head to https://github.com/makersacademy/web-applications-in-python/blob/main/pills/loading_css_or_static_files.md
-            If you're wondering how the CSS file below is being loaded.
-        -->
-        <link rel="stylesheet" href="/static/style.css" >
-    </head>
-    <body>
-        <h2> LOG IN TO MAKERS BNB</h2>
-        <form action="/Login" method="post">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Link your custom CSS file -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="split-container">
+        <div class="left-side"></div>
+        <div class="right-side">
+            <h2 class="sign-up-header">LOG IN TO MAKERS BNB</h2>
+            <form action="/Login" method="post">
+                <p class="t-email">
+                    <label for="email_address">Email Address</label>
+                    <input type="text" name="email_address" id="email_address" placeholder="Email Address">
+                </p>
+                <p class="password-toggle-container">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password">
+                </p>
+                <p>
+                    <input type="submit" value="Login">
+                </p>
+                {% if error %}
+                    <p class="t-error">{{error}}</p>
+                {% endif %}
+            </form>
+        </div>
+    </div>
 
-
-            
-            <p class = "t-email">
-                <label for="email_address">Email Address</label>
-                <input type="text" name="email_address" id="email_address">
-            </p>
-            <p class = "t-password">
-                <label for="password">Password</label>
-                <input type="text" name="password" id="password">
-            </p>
-            <p>
-                
-                <input type="submit" value="Login">
-            </p>
-        
-        {% if error %}
-            <p class ="t-error">
-                {{error}}
-            </p>
-        {% endif %}
-        
-        </form>
-    </body>
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
 </html>
