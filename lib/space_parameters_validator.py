@@ -8,7 +8,7 @@ class SpaceParametersValidator:
         self.image_url = image_url
 
     def _is_valid(self):
-        return self._is_name_valid() and self._is_description_valid() and self._is_price_valid()
+        return self._is_name_valid() and self._is_description_valid() and self._is_price_valid() and self._is_date_from_valid() and self._is_date_to_valid() and self._is_image_url_valid()
     
     def generate_errors(self):
         errors = []
@@ -18,6 +18,8 @@ class SpaceParametersValidator:
             errors.append("Description must not be blank")
         if not self._is_price_valid():
             errors.append("Price must be a number")
+        if not self._is_image_url_valid():
+            errors.append("Image Url must not be blank")
         return errors
     
     def get_valid_name(self):
@@ -61,6 +63,8 @@ class SpaceParametersValidator:
         return True
     
     def _is_image_url_valid(self):
+        if self.image_url is None:
+            return False
         if self.image_url == "":
             return False
         return True
