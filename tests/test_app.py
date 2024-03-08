@@ -47,6 +47,7 @@ def test_create_space(page, test_web_address, db_connection):
     page.fill("input[name=price]", "78.5")
     page.fill("input[name=date_from]", "2024-03-10")
     page.fill("input[name=date_to]", "2024-03-15")
+
     page.fill("input[name=image_url]", "random_url")
     page.click("text='Add listing'")
 
@@ -57,14 +58,21 @@ def test_create_space(page, test_web_address, db_connection):
 
 
 
+
+
 """
 We can render the index page
 """
 def test_get_index(page, test_web_address):
     page.goto(f"http://{test_web_address}/index")
+
     h1_element = page.locator(".m-0.text-primary")
     expect(h1_element).to_have_text("MAKERSBNB")
+
     
+
+
+
 
 def test_create_booking(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")

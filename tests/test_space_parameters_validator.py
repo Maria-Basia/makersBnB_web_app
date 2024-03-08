@@ -34,15 +34,18 @@ def test_generate_errors():
         "Price must be a number",
         "Image Url must not be blank"
     ]
+
     validator_2 = SpaceParametersValidator("", "Description_9", "56.5", "2024-03-10", "2024-03-15", "random_url")
     assert validator_2.generate_errors() == [
         "Name must not be blank"
     ]
 
+
     validator_3 = SpaceParametersValidator("Space_8", "", "456", "2024-03-10", "2024-03-15", "random_url")
     assert validator_3.generate_errors() == [
         "Description must not be blank"
     ]
+
 
     validator_4 = SpaceParametersValidator("Space_8", "Description_8", "", "2024-03-10", "2024-03-15", "random_url")
     assert validator_4.generate_errors() == [
