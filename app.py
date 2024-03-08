@@ -71,6 +71,7 @@ def create_space():
         validator.get_valid_price(),
         validator.get_valid_date_from(),
         validator.get_valid_date_to(),
+        validator.get_valid_image_url(),
         1)
     repository.create(space)
 

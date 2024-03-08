@@ -6,8 +6,8 @@
 </head>
 <body>
     
-        <div class = "header1"><h1>Create a new listing</h1></div>
-        <form action="/index" method="POST">
+    <div class = "header1"><h1>Create a new listing</h1></div>
+    <form action="/index" method="POST">
         {% if errors %}
         <p class="t-errors">
             Your submission contains errors:
@@ -44,10 +44,19 @@
             <input type="date" id="date_to" name="date_to" required>
         </div>
         <br>
+        <div id="image_url">
+            <label for="image_url">Image URL:</label>
+            <br>
+            <input type="text" name="image_url" id="image_url">
+        </div>
+        <br>
         <input type="submit" value="Add listing">
-        </form>
+    </form>
     
     
     
 </body>
 </html>
+
+
+

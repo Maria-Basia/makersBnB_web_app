@@ -45,6 +45,10 @@ class SpaceParametersValidator:
             raise ValueError("Cannot get valid date to")
         return self.date_to
     
+    def get_valid_image_url(self):
+        if not self._is_image_url_valid():
+            raise ValueError("Cannot get valid image url")
+        return self.image_url
 
     def _is_date_from_valid(self):
         if self.date_from == "":
@@ -53,6 +57,11 @@ class SpaceParametersValidator:
 
     def _is_date_to_valid(self):
         if self.date_to == "":
+            return False
+        return True
+    
+    def _is_image_url_valid(self):
+        if self.image_url == "":
             return False
         return True
     

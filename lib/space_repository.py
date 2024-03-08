@@ -16,8 +16,8 @@ class SpaceRepository:
                 row["price"],
                 row["date_from"],
                 row["date_to"],
-                row["user_id"],
-                row["image_url"]
+                row["image_url"],
+                row["user_id"]
                 )
             spaces.append(space)
         return spaces
@@ -32,8 +32,8 @@ class SpaceRepository:
     def create(self, space):
         formatted_dates = [date.strftime('%Y-%m-%d') for date in space.available_dates]
         rows = self._connection.execute(
-            'INSERT INTO spaces (name, description, price, date_from, date_to, user_id, image_url, available_dates) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING id',
-            [space.name, space.description, round(float(space.price), 2), space.date_from, space.date_to, space.user_id, space.image_url, formatted_dates]
+            'INSERT INTO spaces (name, description, price, date_from, date_to, image_url, user_id, available_dates) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING id',
+            [space.name, space.description, round(float(space.price), 2), space.date_from, space.date_to, space.image_url, space.user_id, formatted_dates]
             )
         row = rows[0]
         space.id = row["id"]
