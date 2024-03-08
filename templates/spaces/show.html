@@ -21,10 +21,11 @@
             <p class="t-date_from">Available From: {{space.date_from}}</p>
             <p class="t-date_to">Available To: {{space.date_to}}</p>
             <br>
-            <form method="GET" action="/booking_confirmation">
+            <form method="POST" action="/booking">
                 <h3>Choose a date to book:</h3>
                 <label for="selected_date">Date:</label>
                 <input type="date" id="selected_date" name="selected_date" min="{{space.date_from}}" max="{{space.date_to}}" required>
+                <input type="hidden" name="space_id" value="{{space.id}}">
                 <br>
                 <input type="submit" value="Confirm your booking">
             </form>
