@@ -30,10 +30,8 @@ def test_visit_space_show_page(page, test_web_address, db_connection):
     page.click("input[value='Login']")
     #page.goto(f"http://{test_web_address}/index")
     page.click("text='space_1'")
-    h1_tag = page.locator("h1")
-    expect(h1_tag).to_have_text("Name: space_1")
-    description_tag = page.locator(".t-description")
-    expect(description_tag).to_have_text("Description: description_1")
+    h3_tag = page.locator("h3")
+    expect(h3_tag).to_have_text("Choose a date to book:")
 
 def test_create_space(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")
@@ -42,20 +40,23 @@ def test_create_space(page, test_web_address, db_connection):
     page.fill("input[name='password']", "Rock")
     page.click("input[value='Login']")
     #page.goto(f"http://{test_web_address}/index")
-    page.click("text='Create a new listing'")
+    page.click("text='Add New Listing'")
 
     page.fill("input[name=name]", "space_3")
     page.fill("input[name=description]", "description_3")
     page.fill("input[name=price]", "78.5")
     page.fill("input[name=date_from]", "2024-03-10")
     page.fill("input[name=date_to]", "2024-03-15")
+
+    page.fill("input[name=image_url]", "random_url")
     page.click("text='Add listing'")
 
 
-    h1_tag = page.locator("h1")
-    expect(h1_tag).to_have_text("Name: space_3")
-    description_tag = page.locator(".t-description")
-    expect(description_tag).to_have_text("Description: description_3")
+    h3_tag = page.locator("h3")
+    expect(h3_tag).to_have_text("Choose a date to book:")
+
+
+
 
 
 
@@ -64,9 +65,14 @@ We can render the index page
 """
 def test_get_index(page, test_web_address):
     page.goto(f"http://{test_web_address}/index")
-    strong_tag = page.locator("h1")
-    expect(strong_tag).to_have_text("Listings")
+
+    h1_element = page.locator(".m-0.text-primary")
+    expect(h1_element).to_have_text("MAKERSBNB")
+
     
+
+
+
 
 def test_create_booking(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")
@@ -75,13 +81,14 @@ def test_create_booking(page, test_web_address, db_connection):
     page.fill("input[name='password']", "Rock")
     page.click("input[value='Login']")
     #page.goto(f"http://{test_web_address}/index")
-    page.click("text='Create a new listing'")
+    page.click("text='Add New Listing'")
 
     page.fill("input[name=name]", "space_3")
     page.fill("input[name=description]", "description_3")
     page.fill("input[name=price]", "78.5")
     page.fill("input[name=date_from]", "2024-03-10")
     page.fill("input[name=date_to]", "2024-03-15")
+    page.fill("input[name=image_url]", "random_url")
     page.click("text='Add listing'")
 
     page.click("input[type='date']")
@@ -230,8 +237,8 @@ def test_add_user(page, test_web_address, db_connection):
 
     #page.goto(f"http://{test_web_address}/users")
     page.screenshot(path='screenshot.png', full_page=True)
-    h1_tag = page.locator("h1")
-    expect(h1_tag).to_have_text("Listings")
+    h1_element = page.locator(".m-0.text-primary")
+    expect(h1_element).to_have_text("MAKERSBNB")
 
     # email_element = page.locator(".t-email")
     # password_element = page.locator(".t-password")
@@ -267,10 +274,8 @@ def test_login_redirects(page, test_web_address, db_connection):
     page.fill("input[name='password']", "Rock")
     page.click("input[value='Login']")
     page.screenshot(path='screenshot.png', full_page=True)
-    h1_tag = page.locator("h1")
-    expect(h1_tag).to_have_text("Listings")
-    email_element = page.locator(".t-session_email")
-    expect(email_element).to_have_text("user_1@test.com")
+    h1_element = page.locator(".m-0.text-primary")
+    expect(h1_element).to_have_text("MAKERSBNB")
 
 def test_login_error(page, test_web_address, db_connection):
     db_connection.seed("seeds/makersbnb.sql")

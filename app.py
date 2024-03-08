@@ -58,7 +58,8 @@ def create_space():
         request.form['description'],
         request.form['price'],
         request.form['date_from'],
-        request.form['date_to']
+        request.form['date_to'],
+        request.form['image_url']
     )
 
     if not validator._is_valid():
@@ -71,7 +72,9 @@ def create_space():
         validator.get_valid_price(),
         validator.get_valid_date_from(),
         validator.get_valid_date_to(),
+        validator.get_valid_image_url(),
         user_id)
+
     repository.create(space)
 
     return redirect(f"/index/{space.id}")

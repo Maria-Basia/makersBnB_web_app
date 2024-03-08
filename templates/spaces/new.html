@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>New listing</title>
-  </head>
-  <body>
-    <h1>Create a new listing</h1>
+    <link rel="stylesheet" type="text/css" href="/static/style_new.css">
+</head>
+<body>
+    
+    <div class = "header1"><h1>Create a new listing</h1></div>
     <form action="/index" method="POST">
         {% if errors %}
         <p class="t-errors">
@@ -12,35 +14,49 @@
             {{ errors | join(', ')}}
         </p>
         {% endif %}
-        <p>
+
+    
+        <p id = "name">
             <label for="name">Name</label>
             <br>
             <input type="text" name="name" id="name">
         </p>
 
-        <p>
+        <p id = "description" >
             <label for="description">Description</label>
             <br>
             <input type="text" name="description" id="description">
         </p>
-        <p>
+        <p id = "price">
             <label for="description">Price</label>
             <br>
             <input type="number" name="price" step="any" min="0" id="price">
         </p>
         <br>
-        <div>
+        <div id = "date_from">
             <label for="date_from">Date From:</label>
             <input type="date" id="date_from" name="date_from" required>
             <br>
         </div>
         <br>
-        <div>
+        <div id = "date_to">
             <label for="date_to">Date To:</label>
             <input type="date" id="date_to" name="date_to" required>
         </div>
         <br>
+        <div id="image_url">
+            <label for="image_url">Image URL:</label>
+            <br>
+            <input type="text" name="image_url" id="image_url">
+        </div>
+        <br>
         <input type="submit" value="Add listing">
     </form>
-  </body>
+    
+    
+    
+</body>
 </html>
+
+
+

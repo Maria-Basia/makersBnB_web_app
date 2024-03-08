@@ -1,0 +1,81 @@
+
+body{
+
+background-image: url('https://z.cdrst.com/foto/hotel-sf/b2ac/granderesp/hilton-los-cabos-entorno-11668c96.jpg');
+background-size: cover;
+background-position: center;
+
+}
+
+.header1 {  
+
+    background-color: none;
+    text-align: center;
+    /*padding: 10px;*/
+    
+
+}
+
+
+form {
+    max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #a55be1;
+    color: #fff;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    
+    color: #a55be1;
+    border: solid #a55be1;
+    background-color: #fff;
+}
+#price{
+    font-size: 18px;
+    font-weight: bold;
+}
+#description{
+    font-size: 18px;
+    font-weight: bold;
+}
+#name{
+    font-size: 18px;
+    font-weight: bold;
+}
+#date_from{
+font-size: 18px;
+font-weight: bold;
+}
+#date_to{
+    font-size: 18px;
+    font-weight: bold;
+
+}
+
+    
+
+

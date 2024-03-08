@@ -8,127 +8,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
     <!-- Your custom CSS file -->
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-        }
 
-        .split-container {
-            display: flex;
-            width: 100%;
-            height: 100%;
-        }
-
-        .left-side {
-            flex: 1;
-            background-image: url('https://z.cdrst.com/foto/hotel-sf/b2ac/granderesp/hilton-los-cabos-entorno-11668c96.jpg');
-            background-size: cover;
-            position: relative;
-        }
-
-        .right-side {
-            flex: 1;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            flex-direction: column;
-        }
-
-        h2 {
-            color: #a55be1;
-            text-align: center;
-            font-size: 1.5em;
-            font-weight: 300;
-            margin-bottom: 20px;
-        }
-
-        form {
-            max-width: 400px;
-            text-align: center;
-        }
-
-        label {
-            display: none;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ced4da;
-            border-radius: 20px;
-        }
-        
-        .password-toggle-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ced4da;
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        .password-toggle{
-            position: absolute;
-            right: 20px;
-            top: 38%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-
-        .confirm-password-toggle{
-            position: absolute;
-            right: 20px;
-            top: 38%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-
-        input[type="submit"] {
-            width: 100%;
-            background-color: #a55be1;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #fff;
-            color: #a55be1;
-            border: solid #a55be1;
-        }
-
-        .t-errors {
-            color: #dc3545;
-            margin-bottom: 20px;
-        }
-
-        p a {
-            color: #a55be1;
-        }
-    </style>
 </head>
 <body>
     <div class="split-container">
         <div class="left-side"></div>
         <div class="right-side">
-            <h2>SIGN UP TO MAKERS BNB</h2>
+            <h2 class="sign-up-header">SIGN UP TO MAKERS BNB</h2>
             <form action="/MakersBNB" method="post">
                 
                 
@@ -136,7 +24,6 @@
                     <p class="t-errors">There were errors with your submission: {{errors}}</p>
                 {% endif %}
                 
-
                 <p class="t-email">
                     <label for="email_address">Email Address</label>
                     <input type="text" name="email_address" id="email_address" placeholder="Email Address">
@@ -147,7 +34,7 @@
                     <input type="password" name="password" id="password" placeholder="Password">
                     <span class="password-toggle" onclick="togglePasswordVisibility('password')">🔐</span>
                 </p>
-
+                
                 <p class="password-toggle-container">
                     <label for="confirm_password">Confirm Password</label>
                     <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">

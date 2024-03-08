@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.left-side {
+    flex: 1;
+    background-image: url('https://z.cdrst.com/foto/hotel-sf/b2ac/granderesp/hilton-los-cabos-entorno-11668c96.jpg');
+    background-size: cover;
+    position: relative;
+}
+
+.left-side-space-1 {
+    flex: 1;
+    background-size: cover;
+    
+    position: relative;
+}
+
+.right-side {
+    flex: 1;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.sign-up-header {
+    color: #a55be1;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+form {
+    max-width: 400px;
+    text-align: center;
+}
+
+label {
+    display: none;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+}
+
+.password-toggle-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.password-toggle{
+    position: absolute;
+    right: 20px;
+    top: 38%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.confirm-password-toggle{
+    position: absolute;
+    right: 20px;
+    top: 38%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #a55be1;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #fff;
+    color: #a55be1;
+    border: solid #a55be1;
+}
+
+.t-errors {
+    color: #dc3545;
+    margin-bottom: 20px;
+}
+
+p a {
+    color: #a55be1;
+}
