@@ -15,10 +15,19 @@ class Space():
 
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        if not isinstance(other, Space):
+            return False
+        return (self.id == other.id and
+                self.name == other.name and
+                self.description == other.description and
+                self.price == other.price and
+                self.date_from == other.date_from and
+                self.date_to == other.date_to and
+                self.image_url == other.image_url and
+                self.user_id == other.user_id)
     
     def __repr__(self):
-        return f"Space({self.id}, {self.name}, {self.description}, {self.price}, {self.date_from}, {self.date_to}, {self.image_url} {self.user_id})"
+        return f"Space({self.id}, {self.name}, {self.description}, {self.price}, {self.date_from}, {self.date_to}, {self.image_url}, {self.user_id})"
     
 
     # <a href="/booking_confirmation" class="button-link">
