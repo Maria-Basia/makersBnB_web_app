@@ -14,7 +14,15 @@ class Space():
 
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        if not isinstance(other, Space):
+            return False
+        return (self.id == other.id and
+                self.name == other.name and
+                self.description == other.description and
+                self.price == other.price and
+                self.date_from == other.date_from and
+                self.date_to == other.date_to and
+                self.user_id == other.user_id)
     
     def __repr__(self):
         return f"Space({self.id}, {self.name}, {self.description}, {self.price}, {self.date_from}, {self.date_to}, {self.user_id})"

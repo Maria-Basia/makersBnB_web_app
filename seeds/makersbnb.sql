@@ -64,8 +64,8 @@ INSERT INTO users (email_address, password) VALUES ('user_4@test.com', 'Jazz');
 
 
 -- Finally, we add any records that are needed for the tests to run
-INSERT INTO spaces (name, description, price, date_from, date_to, available_dates, user_id) VALUES ('space_1', 'description_1', 45.5, DATE '2004-04-22', DATE '2005-05-24', '{"2004-04-23", "2004-04-24", "2004-04-25"}', 1);
-INSERT INTO spaces (name, description, price, date_from, date_to, user_id) VALUES ('space_2', 'description_2', 14000.99, DATE '2003-03-11', DATE '2002-02-03', 2);    
+INSERT INTO spaces (name, description, price, date_from, date_to, available_dates, user_id) VALUES ('space_1', 'description_1', 45.5, '2004-04-22', '2005-05-24', '{"2004-04-23", "2004-04-24", "2004-04-25"}', 1);
+INSERT INTO spaces (name, description, price, date_from, date_to, user_id) VALUES ('space_2', 'description_2', 14000.99, '2003-03-11', '2002-02-03', 2);    
 
 
 INSERT INTO bookings (selected_date, user_id, space_id) VALUES ('2024-03-24', 1, 1);
