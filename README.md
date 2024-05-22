@@ -18,7 +18,7 @@ In the output from the Homebrew installation you just ran, should be a line whic
 ; echo 'export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"' >> ~/.zshrc
 
 # Start the postgreSQL software in the background
-; $ brew services start postgresql@15
+; brew services start postgresql@15
 
 # Create a test and development database
 ; createdb makersbnb_db
