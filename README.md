@@ -41,9 +41,9 @@
 # Now visit http://localhost:5000/index in your browser
 ```
 
-## WEB APP DESCRIPTION
+# WEB APP DESCRIPTION
 
-# MakersBnB | AirBnB-like web app | March 2024 | 2-week project
+## MakersBnB | AirBnB-like web app | March 2024 | 2-week project
 **Tech Python | Flask | Pytest | HTML | CSS | PostgreSQL**
 **Group project**
 
@@ -57,10 +57,30 @@ The frontend is developed using HTML to structure the web pages and CSS to enhan
 
 Test-Driven Development (TDD) was applied throughout the project. The testing framework used is Pytest and the project achieves 100% test coverage. 
 
-# Login page
+## Signup page
 
-![Creenshot of the signup page](<Screenshot 2024-05-22 at 11.33.39.png>)
+### Email and password validation
+When signing up:
+- The email format is checked for validity, ensuring it contains an "@" sign. If invalid, an error message provides feedback to the user.
+- Password is validated for length and the inclusion of special characters. If the criteria are not met, an error message provides feedback to the user.
 
+![Screenshot of the signup page](signup_page_screenshot.png)
+
+![Screenshot of the signup page with error messages](signup_error_messages-1.png)
+
+## Login page
+
+We used sessions in Python/Flask to maintain user state (login status) as they navigate through the web app and store user information (such as username) to display at the top of the page when logged in.
+
+![login page screenshot](login_page_screenshot.png)
+
+## All properties page
+
+![Screenshot of the page that lists all the properties](property_listings_screenshot.png)
+
+## Property details page 
+
+![Screenshot of the page that lists the details of a specific property](property_details_screenshot.png)
 
 
 
