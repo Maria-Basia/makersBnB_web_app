@@ -41,13 +41,29 @@
 # Now visit http://localhost:5000/index in your browser
 ```
 
-## APP DESCRIPTION
+## WEB APP DESCRIPTION
 
 # MakersBnB | AirBnB-like web app | March 2024 | 2-week project
 **Tech Python | Flask | Pytest | HTML | CSS | PostgreSQL**
 **Group project**
 
-A property rental web app similar to Airbnb. The project was developed using Test-Driven Development (TDD). Key features include user signup and login with sessions, viewing all property listings, detailed property pages, single-night bookings, and creating new property listings.
+A property rental web app similar to Airbnb. Key features include user signup and login with sessions, viewing all property listings, detailed property pages, single-night bookings, and creating new property listings. 
+
+The backend of the application is built using Python and Flask, providing a robust framework for handling routing, session management, and database interactions.
+
+A PostgreSQL database was used to store User and Property data, enabling efficient linking between the User and Property tables.
+
+The frontend is developed using HTML to structure the web pages and CSS to enhance the visual appeal and the layout.
+
+Test-Driven Development (TDD) was applied throughout the project. The testing framework used is Pytest and the project achieves 100% test coverage. 
+
+# Login page
+
+![Creenshot of the signup page](<Screenshot 2024-05-22 at 11.33.39.png>)
+
+
+
+
 
 
 
