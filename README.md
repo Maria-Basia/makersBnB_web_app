@@ -76,11 +76,18 @@ We used sessions in Python/Flask to maintain user state (login status) as they n
 
 ## All properties page
 
+The user can view all the properties listed, create a new property listing and navigate to specific property page.
+The username/ email is shown at the top of the page through the use of sessions.
+
 ![Screenshot of the page that lists all the properties](property_listings_screenshot.png)
 
 ## Property details page 
 
 ![Screenshot of the page that lists the details of a specific property](property_details_screenshot.png)
+
+## Create a new property listing page
+
+![Screenshot of the page that allows users to create a new property listing](create_new_property_listing_page_screenshot.png)
 
 
 
